@@ -1,0 +1,29 @@
+# app-dev-resources.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-app
+  namespace: ccp-1-opsta-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web-app
+  template:
+    metadata:
+      labels:
+        app: web-app
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:alpine
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: app-db-config
+  namespace: ccp-1-opsta-dev
+type: Opaque
+data:
+  # อันนี้ไว้ทดสอบ Scenario B: ห้ามเห็น Secret
+  password: c2VjcmV0LXBhc3N3b3Jk # "secret-password" ใน base64

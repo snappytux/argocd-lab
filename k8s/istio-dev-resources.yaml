@@ -1,0 +1,9 @@
+# istio-dev-resources.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: istio-custom-config
+  namespace: ccp-1-opsta-istio-dev
+data:
+  mesh-mode: "permissive"
+  log-level: "debug"

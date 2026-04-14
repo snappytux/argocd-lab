@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: opsta-web-service
+  namespace: ccp-1-opsta-dev
+spec:
+  selector:
+    app: opsta-web
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: ClusterIP

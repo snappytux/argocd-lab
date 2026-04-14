@@ -1,0 +1,36 @@
+# 1-projects.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: opsta-app
+  namespace: argocd
+spec:
+  description: "Project for Application Team"
+  sourceRepos:
+    - "*"
+  destinations:
+    - namespace: ccp-1-opsta-dev # จำกัดให้ลงได้แค่ namespace นี้
+      server: https://kubernetes.default.svc
+  roles:
+    - name: developer-role
+      description: "Read-only for app team"
+      policies:
+        # 1. อนุญาตให้ดู Application ได้ทั้งหมดในโปรเจกต์
+        - p, proj:opsta-app:developer-role, applications, get, opsta-app/*, allow
+        # 2. ปฏิเสธการเข้าถึง (get) ทรัพยากรประเภท Secret ภายใต้โปรเจกต์นี้
+        # - p, proj:opsta-app:developer-role, resources, get, opsta-app/*/Secret, deny
+      groups:
+        - tester
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: opsta-istio
+  namespace: argocd
+spec:
+  description: "Project for Infrastructure/Istio Team"
+  sourceRepos:
+    - "*"
+  destinations:
+    - namespace: ccp-1-opsta-istio-dev # จำกัดให้ลงได้แค่ namespace นี้
+      server: https://kubernetes.default.svc

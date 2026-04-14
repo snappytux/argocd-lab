@@ -1,0 +1,29 @@
+# 2-applications.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: web-app-deploy
+  namespace: argocd
+spec:
+  project: opsta-app # ผูกกับ Project opsta-app
+  source:
+    repoURL: https://github.com/argoproj/argocd-example-apps.git # ใช้ตัวอย่าง nginx ง่ายๆ
+    targetRevision: HEAD
+    path: guestbook
+  destination:
+    server: https://kubernetes.default.svc
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: istio-config-deploy
+  namespace: argocd
+spec:
+  project: opsta-istio # ผูกกับ Project opsta-istio
+  source:
+    repoURL: https://github.com/argoproj/argocd-example-apps.git
+    targetRevision: HEAD
+    path: guestbook
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: ccp-1-opsta-istio-dev

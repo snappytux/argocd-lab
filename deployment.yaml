@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: opsta-web-app
+  namespace: ccp-1-opsta-dev
+  labels:
+    app: opsta-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: opsta-web
+  template:
+    metadata:
+      labels:
+        app: opsta-web
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:alpine
+          ports:
+            - containerPort: 80
+          env:
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: app-db-secret
+                  key: password

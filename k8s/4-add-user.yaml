@@ -1,0 +1,13 @@
+# 4-add-user.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-cm
+  namespace: argocd
+  labels:
+    app.kubernetes.io/name: argocd-cm
+    app.kubernetes.io/part-of: argocd
+data:
+  # เพิ่มบรรทัดนี้เพื่อสร้าง user ชื่อ tester
+  # 'login' หมายถึงอนุญาตให้ login ผ่าน UI/CLI ได้
+  accounts.tester: login

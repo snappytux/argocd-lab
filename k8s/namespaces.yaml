@@ -1,0 +1,10 @@
+# namespaces.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ccp-1-opsta-dev
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ccp-1-opsta-istio-dev
