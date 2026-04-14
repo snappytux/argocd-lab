@@ -6,3 +6,5 @@ metadata:
   namespace: argocd
 data:
   policy.csv: |
+    p, role:admin, resources, get, */Secret, allow
+    p, role:admin, exec, create, */*, allow
